@@ -34,7 +34,7 @@ const options = {
       refs.btn.addEventListener('click', () => {
         timerId = setInterval(() => {
           refs.btn.disabled = true;
-          refs.dateTimePicker.disabled = true;
+          // refs.dateTimePicker.disabled = true;
           
             const startTime = Date.now();
             // console.log(startTime);
