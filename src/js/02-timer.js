@@ -1,5 +1,6 @@
 import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
+import Notiflix from 'notiflix';
 
 const refs = {
     dateTimePicker: document.getElementById('datetime-picker'),
@@ -26,7 +27,7 @@ const options = {
     //   console.log(currentDate.getTime());
       if(selectedDates[0] < new Date()) {
         refs.btn.disabled = true;
-        return alert('Please choose a date in the future');
+        return Notiflix.Notify.failure('Please choose a date in the future'); 
       } else {
         refs.btn.disabled = false;
       };
@@ -34,7 +35,7 @@ const options = {
       refs.btn.addEventListener('click', () => {
         timerId = setInterval(() => {
           refs.btn.disabled = true;
-          // refs.dateTimePicker.disabled = true;
+          refs.dateTimePicker.disabled = true;
           
             const startTime = Date.now();
             // console.log(startTime);
@@ -78,10 +79,12 @@ function convertMs(ms) {
   }
 
   function updateTimerFace({ days, hours, minutes, seconds }) {
-    refs.daysLeft.textContent = `${days}`;
-    refs.hoursLeft.textContent = `${hours}`;
-    refs.minutesLeft.textContent = `${minutes}`;
-    refs.secondsLeft.textContent = `${seconds}`;
+    refs.daysLeft.textContent = `${addLeadingZero(days)}`;
+    refs.hoursLeft.textContent = `${addLeadingZero(hours)}`;
+    refs.minutesLeft.textContent = `${addLeadingZero(minutes)}`;
+    refs.secondsLeft.textContent = `${addLeadingZero(seconds)}`;
   };
 
-  
+  function addLeadingZero(value) {
+    return String(value).padStart(2, '0');
+  }
